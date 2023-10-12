@@ -1,6 +1,7 @@
 package com.example.adaptersapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,51 +30,57 @@ public class MainActivity extends AppCompatActivity {
 
         configureListView();
 
-        CustomListAdapter adapter = new CustomListAdapter();
+        CustomListAdapter adapter = new CustomListAdapter(this, shiraishis);
         listView.setAdapter(adapter);
     }
 
     void configureListView() {
         listView = findViewById(R.id.listView01);
     }
-
-    private class CustomListAdapter extends BaseAdapter {
-        // このメソッドは、ListViewに表示されるアイテムの総数を返す
-        @Override
-        public int getCount() {
-            return shiraishis.size();
-        }
-        // このメソッドは、指定された位置のアイテムを返す。
-        @Override
-        public Object getItem(int position) {
-            return shiraishis.get(position);
-        }
-        // このメソッドは、指定された位置のアイテムのIDを返す。
-        // 通常、位置自体がIDとして使用される
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        // このメソッドは、指定された位置のビューを返しす。
-        // 再利用可能なビューを使用して効率的に動作すr
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            // convertViewは再利用可能なビュー
-            // nullの場合、新しいビューを作成する
-            if (convertView == null) {
-                // LayoutInflaterを使用して新しいビューを作成する
-                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                convertView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-            }
-            // convertViewからテキストビューを取得し、アイテムのデータを設定
-            TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
-            textView.setText(shiraishis.get(position));
-            // 完成したビューを返す。(return cellみたいな感じ)
-            return convertView;
-        }
-    }
 }
+
+//    private class CustomListAdapter extends BaseAdapter {
+//        public CustomListAdapter(MainActivity mainActivity, ArrayList<String> shiraishis) {
+//        }
+//
+//        // このメソッドは、ListViewに表示されるアイテムの総数を返す
+//        @Override
+//        public int getCount() {
+//            return shiraishis.size();
+//        }
+//        // このメソッドは、指定された位置のアイテムを返す。
+//        @Override
+//        public Object getItem(int position) {
+//            return shiraishis.get(position);
+//        }
+//        // このメソッドは、指定された位置のアイテムのIDを返す。
+//        // 通常、位置自体がIDとして使用される
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//        // このメソッドは、指定された位置のビューを返しす。
+//        // 再利用可能なビューを使用して効率的に動作すr
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            RecyclerView.ViewHolder holder;
+//            // convertViewは再利用可能なビュー
+//            // nullの場合、新しいビューを作成する
+//            if (convertView == null) {
+//                // LayoutInflaterを使用して新しいビューを作成する
+//                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+//                convertView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+//            } else {
+//                holder = (RecyclerView.ViewHolder) convertView.getTag();
+//            }
+//            // convertViewからテキストビューを取得し、アイテムのデータを設定
+//            TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
+//            textView.setText(shiraishis.get(position));
+//            // 完成したビューを返す。(return cellみたいな感じ)
+//            return convertView;
+//        }
+//    }
+//}
 
 /*　swiftに例えると
 
